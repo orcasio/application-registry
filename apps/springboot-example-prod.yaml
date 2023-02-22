@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: springboot-prod
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/orcasio/springboot-example-config.git
+    targetRevision: prod
+    path: .
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: springboot-prod
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
